@@ -11,7 +11,6 @@ use libp2p::swarm::{Swarm, SwarmBuilder};
 use libp2p::tcp::TokioTcpConfig;
 use libp2p::Transport;
 use log::{error, info};
-use pretty_env_logger;
 use tokio::io::stdin;
 use tokio::io::AsyncBufReadExt;
 use tokio::io::BufReader;
@@ -47,7 +46,7 @@ async fn main() {
         .boxed();
 
     let behaviour =
-        p2p::AppBehaviour::new(app::App::new(), response_sender, init_sender.clone()).await;
+        p2p::AppBehaviour::new(app::App::default(), response_sender, init_sender.clone()).await;
     let mut swarm = SwarmBuilder::new(transp, behaviour, *p2p::PEER_ID)
         .executor(Box::new(|fut| {
             spawn(fut);

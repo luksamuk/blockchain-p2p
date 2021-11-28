@@ -3,15 +3,12 @@ use crate::hash_utils::*;
 use chrono::Utc;
 use log::warn;
 
+#[derive(Default)]
 pub struct App {
     pub blocks: Vec<Block>,
 }
 
 impl App {
-    pub fn new() -> Self {
-        Self { blocks: vec![] }
-    }
-
     pub fn genesis(&mut self) {
         self.blocks.push(Block {
             id: 0,
