@@ -1,0 +1,4 @@
+#+title: Blockchain Example in Rust
+
+This repository follows the tutorial described in [[https://blog.logrocket.com/how-to-build-a-blockchain-in-rust/][LogRocket Blog]].
+
