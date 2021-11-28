@@ -1,6 +1,6 @@
-use chrono::Utc;
-use serde::{Serialize, Deserialize};
 use crate::hash_utils::*;
+use chrono::Utc;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Block {

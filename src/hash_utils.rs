@@ -1,5 +1,5 @@
-use sha2::{Digest, Sha256};
 use log::info;
+use sha2::{Digest, Sha256};
 
 pub const DIFFICULTY_PREFIX: &str = "00";
 

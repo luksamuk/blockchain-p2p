@@ -22,11 +22,13 @@ use tokio::{select, spawn};
 
 #[tokio::main]
 async fn main() {
-    println!("Run with \"RUST_LOG=info cargo run\".\n\n\
+    println!(
+        "Run with \"RUST_LOG=info cargo run\".\n\n\
     Possible commands:\n\
     ls peers\n\
     ls chain\n\
-    create block <data>\n\n");
+    create block <data>\n\n"
+    );
 
     pretty_env_logger::init();
 
@@ -115,8 +117,9 @@ async fn main() {
                 p2p::EventType::LocalChainResponse(resp) => {
                     let json =
                         serde_json::to_string(&resp).expect("Could not transform response to json");
-                    
-                    swarm.behaviour_mut()
+
+                    swarm
+                        .behaviour_mut()
                         .floodsub
                         .publish(p2p::CHAIN_TOPIC.clone(), json.as_bytes());
                 }
@@ -124,7 +127,9 @@ async fn main() {
                 p2p::EventType::Input(line) => match line.as_str() {
                     "ls peers" => p2p::handle_print_peers(&swarm),
                     cmd if cmd.starts_with("ls chain") => p2p::handle_print_chain(&swarm),
-                    cmd if cmd.starts_with("create block") => p2p::handle_create_block(cmd, &mut swarm),
+                    cmd if cmd.starts_with("create block") => {
+                        p2p::handle_create_block(cmd, &mut swarm)
+                    }
                     _ => error!("Unknown command"),
                 },
             }
